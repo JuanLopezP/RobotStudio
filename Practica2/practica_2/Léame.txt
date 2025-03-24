@@ -1,0 +1,6 @@
+Este paquete fue creado por el asistente Pack & Go de RobotStudio. Contiene
+todos los archivos necesarios para abrir la estación "Práctica2.rsstn" en otro ordenador.
+Se utilizaron las opciones siguientes:
+- Las bibliotecas se copiarán al paquete
+- No empaquetar las bibliotecas estándar de ABB
+- Incluir copias de seguridad de todos los controladores virtuales en el paquete

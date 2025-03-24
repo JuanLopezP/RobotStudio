@@ -1,0 +1,32 @@
+MODULE Module1
+        CONST robtarget Target_70:=[[408.686,0,722.885],[0.500000007,0,0.8660254,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget Target_20:=[[25,15,70],[0,0,1,0],[-1,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+!***********************************************************
+    !
+    ! Módulo:  Module1
+    !
+    ! Descripción:
+    !   <Introduzca la descripción aquí>
+    !
+    ! Autor: Javier
+    !
+    ! Versión: 1.0
+    !
+    !***********************************************************
+    
+    
+    !***********************************************************
+    !
+    ! Procedimiento Main
+    !
+    !   Este es el punto de entrada de su programa
+    !
+    !***********************************************************
+    PROC main()
+        !Añada aquí su código
+    ENDPROC
+    PROC Path_20()
+        MoveL Target_70,v1000,z100,TVentosa\WObj:=wobj0;
+        MoveL Target_20,v1000,z100,TVentosa\WObj:=WO_Pieza1;
+    ENDPROC
+ENDMODULE
