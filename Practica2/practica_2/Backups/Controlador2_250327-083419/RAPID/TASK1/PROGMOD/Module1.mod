@@ -44,23 +44,31 @@ MODULE Module1
     ENDPROC
 
     PROC Trayectoria1()
-        MoveL PosInit,v500,z100,TVentosa\WObj:=wobj0;
-        MoveL Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
+        MoveJ PosInit,v500,z100,TVentosa\WObj:=wobj0;
+        MoveJ Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
         MoveL PosP1,v500,fine,TVentosa\WObj:=WO_Pieza1;
         SetDO DTool,1;
         WaitTime 0.5;
-        MoveL Aprox2,v500,z100,TVentosa\WObj:=WO_Pieza2;
+        MoveL Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
+        MoveJ Aprox2,v500,z100,TVentosa\WObj:=WO_Pieza2;
         MoveL PosP2,v500,fine,TVentosa\WObj:=WO_Pieza2;
         SetDO DTool,0;
         WaitTime 0.5;
-        MoveL PosInit,v500,z100,TVentosa\WObj:=wobj0;
+        MoveJ PosInit,v500,z100,TVentosa\WObj:=wobj0;
     ENDPROC
 
     PROC Trayectoria2()
+        MoveJ PosInit,v500,z100,TVentosa\WObj:=wobj0;
+        MoveJ Aprox2,v500,z100,TVentosa\WObj:=WO_Pieza2;
         MoveL PosP2,v500,fine,TVentosa\WObj:=WO_Pieza2;
+        SetDO DTool,1;
         MoveL Aprox2,v500,z100,TVentosa\WObj:=WO_Pieza2;
-        MoveL Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
+        MoveJ Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
         MoveL PosP1,v500,fine,TVentosa\WObj:=WO_Pieza1;
-        MoveL PosInit,v500,z100,TVentosa\WObj:=wobj0;
+        SetDO DTool,0;
+        MoveJ Aprox1,v500,z100,TVentosa\WObj:=WO_Pieza1;
+        MoveJ PosInit,v500,z100,TVentosa\WObj:=wobj0;
+        
     ENDPROC
+  
 ENDMODULE
