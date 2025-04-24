@@ -1,0 +1,82 @@
+MODULE Module1
+        CONST robtarget PosInit_10:=[[408.685,0,568.405],[0.5,0,0.866025404,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoAcercamiento:=[[10,30,50],[0,-0.707106781,0.707106781,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoRecogidaPadre:=[[10,30,20],[0,-0.707106781,0.707106781,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoAcercamiento1:=[[0,-150,30],[0,-0.707106781,0.707106781,0],[-1,0,-2,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoRecogida1:=[[0,-150,0],[0,-0.707106781,0.707106781,0],[-1,0,-2,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoAcercamiento2:=[[0,0,30],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoRecogida2:=[[0,0,0],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoAcercamiento3:=[[0,150,30],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoRecogida3:=[[0,150,0],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    VAR num contador := 0;
+    VAR num seleccion; !Con esto puedo seleccionar la torre elegida por el usuario 
+    VAR num hpieza := 20;
+    
+!***********************************************************
+    !
+    ! Módulo:  Module1
+    !
+    ! Descripción:
+    !   <Introduzca la descripción aquí>
+    !
+    ! Autor: Javier
+    !
+    ! Versión: 1.0
+    !
+    !***********************************************************
+    
+    
+    !***********************************************************
+    !
+    ! Procedimiento Main
+    !
+    !   Este es el punto de entrada de su programa
+    !
+    !***********************************************************
+  PROC main()
+            !MoveL PuntoRecogidaPadre, v50, fine, TVentosa\WObj:=WO_Pieza;
+          Initialize;
+          Pick(PuntoRecogidaPadre);
+          Place(PuntoRecogida1);
+           
+        
+        !Añada aquí su código
+    ENDPROC
+   
+    PROC Initialize() ! Este solo es como el inicio del programa simplemente sirve para inicializar variables a un cierto valor pero OJO no para declararlas
+        contador := 0; 
+        
+    ENDPROC
+   PROC Pick(robtarget PuntoRecogidaPadre)
+    VAR robtarget punto_aprox;
+    punto_aprox := Offs(PuntoRecogidaPadre, 0, 0, 50);  ! 50 mm por encima
+
+    MoveJ PosInit_10, v100, z10, TVentosa\WObj:=wobj0;
+    MoveJ punto_aprox, v100, z10, TVentosa\WObj:=WO_Pieza;
+    MoveL PuntoRecogidaPadre, v50, fine, TVentosa\WObj:=WO_Pieza;
+
+    SetDO DTool, 1;
+    WaitTime 0.5;
+
+    MoveL punto_aprox, v100, z10, TVentosa\WObj:=WO_Pieza;
+   
+ENDPROC
+
+    PROC Place(robtarget PuntoRecogida1)
+        VAR robtarget PuntoMesa;
+        VAR robtarget punto_aprox_1;
+        PuntoMesa := Offs(PuntoRecogida1, 0, 0, hpieza);
+        punto_aprox_1 := Offs(PuntoMesa, 0, 0, 50);  ! 50 mm por encima
+    
+      
+        MoveJ punto_aprox_1, v100, z10, TVentosa\WObj:=WO_Base;
+        MoveL PuntoMesa, v50, fine, TVentosa\WObj:=WO_Base;
+    
+        SetDO DTool, 0;
+        WaitTime 0.5;
+    
+        MoveL punto_aprox_1, v100, z10, TVentosa\WObj:=WO_Base;
+        MoveJ PosInit_10, v100, z10, TVentosa\WObj:=wobj0;
+    ENDPROC
+      
+ENDMODULE
