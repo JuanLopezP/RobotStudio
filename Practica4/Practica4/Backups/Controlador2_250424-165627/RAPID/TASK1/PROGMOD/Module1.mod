@@ -1,13 +1,11 @@
 MODULE Module1
     CONST robtarget PosInit_10:=[[408.685,0,568.405],[0.5,0,0.866025404,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget PuntoAcercamiento:=[[10,30,50],[0,-0.707106781,0.707106781,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget PuntoRecogidaPadre:=[[10,30,20],[0,-0.707106781,0.707106781,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget PuntoAcercamiento1:=[[0,-150,30],[0,-0.707106781,0.707106781,0],[-1,0,-2,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST robtarget PuntoRecogidaPadre:=[[10,30,20],[0,0,1,0],[0,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget PuntoRecogida1:=[[0,-150,0],[0,-0.707106781,0.707106781,0],[-1,0,-2,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget PuntoAcercamiento2:=[[0,0,30],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget PuntoRecogida2:=[[0,0,0],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
-    CONST robtarget PuntoAcercamiento3:=[[0,150,30],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     CONST robtarget PuntoRecogida3:=[[0,150,0],[0,-0.707106781,0.707106781,0],[0,0,-1,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST jointtarget Jhome:=[[0,0,-90,0,0,0],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
+    CONST jointtarget PosInit:=[[0,0,0,0,0,120],[9E+09,9E+09,9E+09,9E+09,9E+09,9E+09]];
     VAR num contador:=0;
     VAR num seleccion:=0;
     !Con esto puedo seleccionar la torre elegida por el usuario
@@ -16,6 +14,7 @@ MODULE Module1
     VAR num torre2:=0;
     VAR num torre3:=0;
     VAR num altura:=0;
+    
 
 
     !***********************************************************
@@ -41,6 +40,8 @@ MODULE Module1
     !***********************************************************
     PROC main()
         Initialize;
+        !MoveJ PosInit_10,v500,z10,TVentosa\WObj:=wobj0;
+        !MoveAbsJ PosInit,v500,z100,TVentosa\WObj:=wobj0;
 
         FOR contador FROM 1 TO 10 DO
             
@@ -74,7 +75,7 @@ MODULE Module1
                 torre3:=torre3+hpieza;
             ENDIF
         ENDFOR
-        
+        MoveAbsJ Jhome,v500,z100,TVentosa\WObj:=wobj0;
 
 
     
@@ -83,7 +84,7 @@ MODULE Module1
 PROC Initialize()
     ! Este solo es como el inicio del programa simplemente sirve para inicializar variables a un cierto valor pero OJO no para declararlas
     contador:=0;
-    MoveJ PosInit_10,v100,z10,TVentosa\WObj:=wobj0;
+    
 
 ENDPROC
 
@@ -93,13 +94,13 @@ PROC Pick(robtarget PuntoRecogidaPadre)
     ! 50 mm por encima
 
    
-    MoveJ punto_aprox,v100,z10,TVentosa\WObj:=WO_Pieza;
+    MoveJ punto_aprox,v500,z10,TVentosa\WObj:=WO_Pieza;
     MoveL PuntoRecogidaPadre,v50,fine,TVentosa\WObj:=WO_Pieza;
 
     SetDO DTool,1;
     WaitTime 0.5;
 
-    MoveL punto_aprox,v100,z10,TVentosa\WObj:=WO_Pieza;
+    MoveL punto_aprox,v500,z10,TVentosa\WObj:=WO_Pieza;
 
 ENDPROC
 
@@ -111,15 +112,23 @@ PROC Place(robtarget Punto)
     ! 50 mm por encima
 
 
-    MoveJ punto_aprox_1,v100,z10,TVentosa\WObj:=WO_Base;
+    MoveJ punto_aprox_1,v500,z10,TVentosa\WObj:=WO_Base;
     MoveL PuntoMesa,v50,fine,TVentosa\WObj:=WO_Base;
 
     SetDO DTool,0;
     WaitTime 0.5;
 
-    MoveL punto_aprox_1,v100,z10,TVentosa\WObj:=WO_Base;
-    !MoveJ PosInit_10,v100,z10,TVentosa\WObj:=wobj0;
+    MoveL punto_aprox_1,v500,z10,TVentosa\WObj:=WO_Base;
+    !MoveJ PosInit_10,v500,z10,TVentosa\WObj:=wobj0;
 
 ENDPROC
+    PROC Trayectoria()
+        MoveJ PosInit_10,v1000,z100,TVentosa\WObj:=wobj0;
+        MoveJ PuntoRecogidaPadre,v1000,z100,TVentosa\WObj:=WO_Pieza;
+        MoveJ PuntoRecogida1,v1000,z100,TVentosa\WObj:=WO_Base;
+        MoveJ PuntoRecogida2,v1000,z100,TVentosa\WObj:=WO_Base;
+        MoveJ PuntoRecogida3,v1000,z100,TVentosa\WObj:=WO_Base;
+        MoveAbsJ Jhome,v1000,z100,TVentosa\WObj:=wobj0;
+    ENDPROC
 
 ENDMODULE
