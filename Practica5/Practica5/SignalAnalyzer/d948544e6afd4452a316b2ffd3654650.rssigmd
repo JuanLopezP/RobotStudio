@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Metadata Version="1">
+  <Id>d948544e6afd4452a316b2ffd3654650</Id>
+  <Name>Recording-3</Name>
+  <EventCount>1</EventCount>
+  <StartedUtc>2025-05-21T15:59:13.0392710Z</StartedUtc>
+  <EndedUtc>2025-05-21T15:59:16.4646261Z</EndedUtc>
+  <TotalTime>0</TotalTime>
+  <Signals />
+  <Sources>
+    <Source type="Station" id="{b421cc3d-eee0-447f-92c5-d42cf327e6ac}" displayName="Práctica5_inicio" />
+  </Sources>
+</Metadata>
